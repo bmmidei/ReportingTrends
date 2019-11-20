@@ -1,8 +1,9 @@
 // Import the Google Cloud client library using default credentials
 const {BigQuery} = require('@google-cloud/bigquery');
 const tempKey = process.env.KEY_1 + process.env.KEY_2 + process.env.KEY_3 + process.env.KEY_4 + process.env.KEY_5 + process.env.KEY_6 + process.env.KEY_7 + process.env.KEY_8;
+
 // Stupid key reformatting for newlines
-const googleApiKey = key.replace(new RegExp("\\\\n", "\g"), "\n")
+const googleApiKey = tempKey.replace(new RegExp("\\\\n", "\g"), "\n")
 
 const bigquery = new BigQuery( {
   projectId: process.env.PROJECT_ID,
