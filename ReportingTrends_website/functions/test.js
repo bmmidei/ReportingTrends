@@ -1,17 +1,13 @@
 // Import the Google Cloud client library using default credentials
 const {BigQuery} = require('@google-cloud/bigquery');
-const keyParts = [process.env.KEY_1, process.env.KEY_2, process.env.KEY_3, process.env.KEY_4, process.env.KEY_5, process.env.KEY_6, process.env.KEY_7, process.env.KEY_8];
-console.log(keyParts.join(''));
-console.log(typeof(keyParts.join('')));
-console.log(process.env.PROJECT_ID);
-console.log(typeof(process.env.PROJECT_ID));
-console.log(process.env.CLIENT_EMAIL);
-console.log(typeof(process.env.CLIENT_EMAIL));
+const key = process.env.KEY_1 + process.env.KEY_2 + process.env.KEY_3 + process.env.KEY_4 + process.env.KEY_5 + process.env.KEY_6 + process.env.KEY_7 + process.env.KEY_8;
+console.log(key);
+console.log(typeof(key));
 const bigquery = new BigQuery( {
   projectId: process.env.PROJECT_ID,
   credentials: {
     client_email: process.env.CLIENT_EMAIL,
-    private_key: keyParts.join('')
+    private_key: key,
     }
   })
 
