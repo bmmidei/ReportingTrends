@@ -1,13 +1,14 @@
 // Import the Google Cloud client library using default credentials
 const {BigQuery} = require('@google-cloud/bigquery');
-const key = process.env.KEY_1 + process.env.KEY_2 + process.env.KEY_3 + process.env.KEY_4 + process.env.KEY_5 + process.env.KEY_6 + process.env.KEY_7 + process.env.KEY_8;
-console.log(key);
+const tempKey = process.env.KEY_1 + process.env.KEY_2 + process.env.KEY_3 + process.env.KEY_4 + process.env.KEY_5 + process.env.KEY_6 + process.env.KEY_7 + process.env.KEY_8;
+// Stupid key reformatting for newlines
+const googleApiKey = key.replace(new RegExp("\\\\n", "\g"), "\n")
 
 const bigquery = new BigQuery( {
   projectId: process.env.PROJECT_ID,
   credentials: {
     client_email: process.env.CLIENT_EMAIL,
-    private_key: key
+    private_key: googleApiKey
     }
   })
 
@@ -35,7 +36,7 @@ async function query() {
     // Print the results
     return rows;
 }
-
+query()
 exports.handler = function(event, context, callback) {
     query()
       .then(response => {
