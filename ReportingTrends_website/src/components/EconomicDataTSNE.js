@@ -12,13 +12,12 @@ class EconomicDataTSNE extends Component {
   };
 
   queryData() {
-    // return fetch('/.netlify/functions/test', {
-    return fetch('https://eloquent-blackwell-3fb9dd.netlify.com/.netlify/functions/test', {
+    return fetch('/.netlify/functions/EconomicData', {
       headers: { accept: "Accept: application/json" },
       method: 'POST',
       body: ''
     }).then(response => {
-      return response
+      return response.json()
     })
   }
 

@@ -2,28 +2,27 @@
 const {BigQuery} = require('@google-cloud/bigquery');
 const tempKey = process.env.KEY_1 + process.env.KEY_2 + process.env.KEY_3 + process.env.KEY_4 + process.env.KEY_5 + process.env.KEY_6 + process.env.KEY_7 + process.env.KEY_8;
 
-// Stupid key reformatting for newlines
-const googleApiKey = tempKey.replace(new RegExp("\\\\n", "\g"), "\n")
+// Key reformatting for newlines
+const googleApiKey = tempKey.replace(new RegExp("\\\\n", "\g"), "\n");
 
+// Instantiates a BigQuery Client
 const bigquery = new BigQuery( {
   projectId: process.env.PROJECT_ID,
   credentials: {
     client_email: process.env.CLIENT_EMAIL,
     private_key: googleApiKey
     }
-  })
+  });
 
 async function query() {
-    // Queries the U.S. given names dataset for the state of Texas.
-
+    // Queries the Economic Data Table in BigQuery
     const query = `SELECT *
     FROM \`ReportingTrends.economic_tsne\`
-    LIMIT 100`;
+    LIMIT 1000`;
 
     // For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query
     const options = {
         query: query,
-        // Location must match that of the dataset(s) referenced in the query.
         location: 'US',
     };
 
@@ -34,7 +33,7 @@ async function query() {
     // Wait for the query to finish
     const [rows] = await job.getQueryResults();
 
-    // Print the results
+    // Return
     return rows;
 }
 
@@ -57,4 +56,5 @@ exports.handler = function(event, context, callback) {
       .catch(err => {
         console.log(err)
       })
-}
+};
+
