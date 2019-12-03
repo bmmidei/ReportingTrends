@@ -16,7 +16,7 @@ const IndexPage = () => (
     {/*</div>*/}
     <EconomicDataTSNE width={600} height={400}/>
     <WordCountsLineChart width={600} height={400}/>
-    <LIWCLineChart width={600} height={400}/>
+    <LIWCLineChart />
     <Link to="/page-2/">Go to page 2</Link>
   </Layout>
 );
