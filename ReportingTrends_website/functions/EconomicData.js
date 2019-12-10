@@ -18,6 +18,7 @@ async function query() {
     // Queries the Economic Data Table in BigQuery
     const query = `SELECT *
     FROM \`ReportingTrends.economic_tsne\`
+    WHERE cast(a.year as int64)>=1920
     LIMIT 1000`;
 
     // For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query

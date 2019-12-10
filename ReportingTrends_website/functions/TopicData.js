@@ -20,6 +20,7 @@ async function query() {
     FROM \`bigdata-6893.ReportingTrends.topics\` as a
     INNER JOIN \`bigdata-6893.ReportingTrends.article_counts\` as b
     ON a.year = b.year
+    WHERE cast(a.year as int64)>=1920
     ORDER BY year`;
 
     // For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query
