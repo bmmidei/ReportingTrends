@@ -53,7 +53,7 @@ class IndexPage extends Component {
         {/*</div>*/}
         {EconomicData && <EconomicDataTSNE data={EconomicData} width={600} height={400}/>}
         {EconomicData && <WordCountsLineChart data={EconomicData} width={600} height={400}/>}
-        {LIWCData && <LIWCLineChart data={LIWCData}/>}
+        {LIWCData && <LIWCLineChart height={500} data={LIWCData}/>}
         {TopicData && <TopicLineChart height={500} data={TopicData}/>}
         <Link to="/page-2/">Go to page 2</Link>
       </Layout>

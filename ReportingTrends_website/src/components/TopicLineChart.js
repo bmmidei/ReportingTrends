@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
-import Dropdown from "react-dropdown";
 import {ResponsiveLine} from "@nivo/line";
 
 
 class TopicLineChart extends Component {
   // Initialize with no data
   state = {
-    renderedData: [],
     allTopics: [],
     renderedTopics: [],
   };
@@ -17,11 +15,9 @@ class TopicLineChart extends Component {
 
   formatRenderedData = () => {
     console.log('Formatting DisplayData for topic line chart');
-
     // Get all unique topics in the dataset
     let allTopics = [...new Set(this.props.data.map(({topic}) => (topic)))];
-
-    let renderedData = allTopics.map((topic) => {
+    return allTopics.map((topic) => {
       let topicData = this.props.data.filter(elem => elem['topic'] === topic)
         .map(elem => {
           return {
@@ -31,8 +27,7 @@ class TopicLineChart extends Component {
           }
         });
       return {id: topic, data: topicData};
-    });
-    return renderedData
+    })
   };
 
   render() {
@@ -72,12 +67,13 @@ class TopicLineChart extends Component {
           // pointLabel=y
           pointLabelYOffset={-12}
           useMesh={true}
-          tooltip={(elem) => (
-            <strong>
-              {elem['point']['data']['x']}: {elem['point']['data']['y']} %
-              {/*{[Object.keys(elem['point']['data'])].join(',')}*/}
-            </strong>
-          )}
+          enableSlices="x"
+          // tooltip={(elem) => (
+          //   <strong>
+          //     {elem['point']['data']['x']}: {elem['point']['data']['y']} %
+          //     {/*{[Object.keys(elem['point']['data'])].join(',')}*/}
+          //   </strong>
+          // )}
           legends={[
             {
               anchor: 'bottom-right',
