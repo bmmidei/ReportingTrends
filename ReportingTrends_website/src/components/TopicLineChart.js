@@ -9,10 +9,6 @@ class TopicLineChart extends Component {
     renderedTopics: [],
   };
 
-  componentDidMount() {
-    this.formatRenderedData()
-  };
-
   formatRenderedData = () => {
     console.log('Formatting DisplayData for topic line chart');
     // Get all unique topics in the dataset
