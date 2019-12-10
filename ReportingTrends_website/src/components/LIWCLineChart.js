@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import { ResponsiveLine } from '@nivo/line'
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
+import spearson from '../static/spearson.js';
 
 
 class LIWCLineChart extends Component {
@@ -15,10 +16,6 @@ class LIWCLineChart extends Component {
                    'Analytical_Thinking', 'Clout', 'Authentic',
                    'Emotional_Tone', 'Anxiety', 'Anger', 'Sadness'],
   };
-
-  componentDidMount() {
-    this.formatRenderedData()
-  }
 
   handleChange1 = feature1 => {
     this.setState({ feature1: feature1.value});
@@ -48,6 +45,14 @@ class LIWCLineChart extends Component {
   render() {
     const renderedData = this.formatRenderedData();
 
+    let corrData = renderedData.map((feature) =>{
+      let featureData = feature['data'];
+      return featureData.map((elem) => elem['y'] )
+    });
+    let x = corrData[0].map(Number);
+    let y = corrData[1].map(Number);
+    let correlation = spearson.correlation.pearson(x, y, true);
+
     return (
       <Fragment>
         <Dropdown options={this.state.LIWCFeatures}
@@ -62,6 +67,7 @@ class LIWCLineChart extends Component {
                   placeholder="Select an option"
         />
         <p>Feature 2</p>
+        <h5>{correlation}</h5>
         <div style={{ height: this.props.height}}>
           <ResponsiveLine
             data={renderedData}
