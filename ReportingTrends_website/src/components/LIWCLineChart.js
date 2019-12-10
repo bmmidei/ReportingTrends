@@ -42,7 +42,7 @@ class LIWCLineChart extends Component {
       console.log('API error', error)
     });
 
-    console.log('fetching Econcomic data');
+    console.log('fetching Economic data');
     this.queryData('EconomicData').then((response) => {
       // Store queried data in state
       response.sort((a, b) => (a.year < b.year) ? -1 : 1);
@@ -98,8 +98,8 @@ class LIWCLineChart extends Component {
       <ResponsiveLine
         data={chartData}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
-        xScale={{ type: 'linear', min: 1940, max: 'auto' }}
-        yScale={{ type: 'linear', stacked: true, min: 'auto', max: 'auto' }}
+        xScale={{ type: 'linear', min: 'auto', max: 'auto' }}
+        yScale={{ type: 'linear', stacked: false, min: 'auto', max: 'auto' }}
         axisTop={null}
         axisBottom={{
           orient: 'bottom',
@@ -124,12 +124,12 @@ class LIWCLineChart extends Component {
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: 'Poop',
+          legend: 'asdf',
           legendOffset: 40,
           legendPosition: 'middle'
         }}
         colors={{ scheme: 'nivo' }}
-        pointSize={10}
+        // pointSize={10}
         pointColor={{ theme: 'background' }}
         pointBorderWidth={2}
         pointBorderColor={{ from: 'serieColor' }}

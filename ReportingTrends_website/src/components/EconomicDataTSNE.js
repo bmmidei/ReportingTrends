@@ -4,29 +4,8 @@ import * as d3 from 'd3'
 
 class EconomicDataTSNE extends Component {
   // Initialize with no data
-  state = {
-    data: []
-  };
-
-  queryData() {
-    // Toggle these two lines between local dev and deployment
-    // return fetch('https://eloquent-blackwell-3fb9dd.netlify.com/.netlify/functions/EconomicData', {
-    return fetch('/.netlify/functions/EconomicData', {
-      headers: { accept: "Accept: application/json" },
-      method: 'POST',
-    }).then(response => {
-      return response.json()
-    })
-  }
 
   componentDidMount() {
-    console.log('fetching data');
-    this.queryData().then((response) => {
-      // Store queried data in state
-      this.setState({data: response});
-    }).catch((error) => {
-      console.log('API error', error)
-    });
     this.createChart()
   };
 
@@ -35,7 +14,7 @@ class EconomicDataTSNE extends Component {
   };
 
   createChart() {
-    let data = this.state.data;
+    let data = this.props.data;
     let left = d3.min(data, function (d) { return d.x });
     let right = d3.max(data, function (d) { return d.x });
     let bottom = d3.min(data, function (d) { return d.y });
