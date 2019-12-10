@@ -6,29 +6,8 @@ class WordCountsLineChart extends Component {
   // Declare a new state variable, which we'll call "count"
   // const [count, setCount] = useState(0);
   // set the dimensions and margins of the graph
-  state = {
-    data: []
-  };
-
-  queryData() {
-    // Toggle these two lines between local dev and deployment
-    // return fetch('https://eloquent-blackwell-3fb9dd.netlify.com/.netlify/functions/EconomicData', {
-    return fetch('/.netlify/functions/EconomicData', {
-      headers: { accept: "Accept: application/json" },
-      method: 'POST',
-    }).then(response => {
-      return response.json()
-    })
-  }
 
   componentDidMount() {
-    console.log('fetching data');
-    this.queryData().then((response) => {
-      // Store queried data in state
-      this.setState({data: response});
-    }).catch((error) => {
-      console.log('API error', error)
-    });
     this.createChart()
   };
 
@@ -38,7 +17,7 @@ class WordCountsLineChart extends Component {
 
   createChart() {
     // Sort data by year
-    let data = this.state.data;
+    let data = this.props.data;
     data.sort((a, b) => (a.year > b.year) ? -1 : 1);
 
     let margin = {top: 10, right: 50, bottom: 40, left: 60},
