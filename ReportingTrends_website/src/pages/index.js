@@ -14,6 +14,16 @@ class IndexPage extends Component {
     EconomicData: [],
     LIWCData: [],
     TopicData: [],
+    worldEvents: [
+      {year: 1929, event: 'Wall Street Crash Triggering Great Depression'},
+      {year: 1939, event: 'Outbreak of WWII'},
+      {year: 1945, event: 'Conclusion of WWII'},
+      {year: 1955, event: 'Outbreak of Vietnam War'},
+      {year: 1962, event: 'Cuban Missile Crisis'},
+      {year: 1989, event: 'Fall of the Berlin Wall'},
+      {year: 2001, event: 'September 11th Attacks'},
+      {year: 2008, event: 'Housing Bubble Burst'}
+    ]
   };
 
   queryData = (source) => {
