@@ -18,7 +18,7 @@ async function query() {
     // Queries the Economic Data Table in BigQuery
     const query = `SELECT *
     FROM \`ReportingTrends.liwc\`
-    WHERE cast(a.year as int64)>=1920
+    WHERE cast(year as int64)>=1920
     ORDER BY year
     LIMIT 1000`;
 
