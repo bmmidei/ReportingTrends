@@ -6,6 +6,7 @@ import Layout from "../components/layout"
 import EconomicDataTSNE from "../components/EconomicDataTSNE"
 import WordCountsLineChart from "../components/WordCountsLineChart";
 import LIWCLineChart from "../components/LIWCLineChart";
+import LIWCEconomicLineChart from "../components/LIWCEconomicLineChart";
 import TopicLineChart from "../components/TopicLineChart";
 
 class IndexPage extends Component {
@@ -64,6 +65,8 @@ class IndexPage extends Component {
         {EconomicData && <EconomicDataTSNE data={EconomicData} width={600} height={400}/>}
         {EconomicData && <WordCountsLineChart data={EconomicData} width={600} height={400}/>}
         {LIWCData && <LIWCLineChart height={500} data={LIWCData}/>}
+        {LIWCData && EconomicData &&
+          <LIWCEconomicLineChart height={500} economicData={EconomicData} LIWCData={LIWCData}/>}
         {TopicData && <TopicLineChart height={500} data={TopicData}/>}
         <Link to="/page-2/">Go to page 2</Link>
       </Layout>
