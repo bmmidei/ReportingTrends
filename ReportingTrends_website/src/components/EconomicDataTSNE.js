@@ -16,7 +16,6 @@ class EconomicDataTSNE extends Component {
 
   render() {
     let renderedData = this.formatRenderedData();
-    console.log(renderedData);
     return (
       <Fragment>
         <div style={{ height: this.props.height }}>
@@ -37,21 +36,23 @@ class EconomicDataTSNE extends Component {
             axisRight={null}
             axisBottom={{
               orient: 'bottom',
-              tickSize: 5,
+              tickSize: 0,
               tickPadding: 5,
               tickRotation: 0,
               legend: 'TSNE Dimension 1',
               legendPosition: 'middle',
-              legendOffset: 46
+              legendOffset: 46,
+              'format': () => null
             }}
             axisLeft={{
               orient: 'left',
-              tickSize: 5,
+              tickSize: 0,
               tickPadding: 5,
               tickRotation: 0,
               legend: 'TSNE Dimension 2',
               legendPosition: 'middle',
-              legendOffset: -60
+              legendOffset: -60,
+              'format': () => null
             }}
             tooltip={(elem) => {
               let data = elem['node']['data'];
