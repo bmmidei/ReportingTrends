@@ -5,9 +5,22 @@ import Layout from "../components/layout"
 // import Image from "../components/image"
 import EconomicDataTSNE from "../components/EconomicDataTSNE"
 import WordCountsLineChart from "../components/WordCountsLineChart";
-import LIWCLineChart from "../components/LIWCLineChart";
-import LIWCEconomicLineChart from "../components/LIWCEconomicLineChart";
 import TopicLineChart from "../components/TopicLineChart";
+import Loadable from 'react-loadable';
+
+const LoadableLIWCLineChart = Loadable({
+  loader: () => import('../components/LIWCLineChart'),
+  loading() {
+    return <div>Loading...</div>
+  }
+});
+
+const LoadableLIWCEconomicLineChart = Loadable({
+  loader: () => import('../components/LIWCEconomicLineChart'),
+  loading() {
+    return <div>Loading...</div>
+  }
+});
 
 class IndexPage extends Component {
 
@@ -64,15 +77,14 @@ class IndexPage extends Component {
         {/*</div>*/}
         {EconomicData && <EconomicDataTSNE data={EconomicData} width={600} height={400}/>}
         {EconomicData && <WordCountsLineChart data={EconomicData} width={600} height={400}/>}
-        {LIWCData && <LIWCLineChart height={500} data={LIWCData}/>}
+        {LIWCData && <LoadableLIWCLineChart height={500} data={LIWCData}/>}
         {LIWCData && EconomicData &&
-          <LIWCEconomicLineChart height={500} economicData={EconomicData} LIWCData={LIWCData}/>}
+          <LoadableLIWCEconomicLineChart height={500} economicData={EconomicData} LIWCData={LIWCData}/>}
         {TopicData && <TopicLineChart height={500} data={TopicData}/>}
         <Link to="/page-2/">Go to page 2</Link>
       </Layout>
     )
   }
 }
-
 
 export default IndexPage;
