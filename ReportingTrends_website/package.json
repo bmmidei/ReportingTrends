@@ -19,11 +19,13 @@
     "gatsby-source-filesystem": "^2.1.36",
     "gatsby-transformer-sharp": "^2.3.3",
     "netlify-lambda": "^1.6.3",
+    "plotly.js": "1.51.2",
     "prop-types": "^15.7.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-dropdown": "^1.6.4",
-    "react-helmet": "^5.2.1"
+    "react-helmet": "^5.2.1",
+    "react-plotly.js": "2.4.0"
   },
   "devDependencies": {
     "prettier": "^1.19.1"

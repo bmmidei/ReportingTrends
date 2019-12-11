@@ -10,7 +10,6 @@ class TopicLineChart extends Component {
   };
 
   formatRenderedData = () => {
-    console.log('Formatting DisplayData for topic line chart');
     // Get all unique topics in the dataset
     let allTopics = [...new Set(this.props.data.map(({topic}) => (topic)))];
     return allTopics.map((topic) => {
