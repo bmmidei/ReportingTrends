@@ -1,8 +1,8 @@
 import React, {Component, Fragment} from 'react';
-import { ResponsiveLine } from '@nivo/line'
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 import spearson from '../static/spearson.js';
+import Plot from 'react-plotly.js';
 
 
 class LIWCLineChart extends Component {
@@ -19,39 +19,42 @@ class LIWCLineChart extends Component {
 
   handleChange1 = feature1 => {
     this.setState({ feature1: feature1.value});
-    console.log(`Option selected:`, feature1);
   };
 
   handleChange2 = feature2 => {
     this.setState({ feature2: feature2.value});
-    console.log(`Option selected:`, feature2);
   };
 
   formatRenderedData = () => {
     // let LIWCFeatures = Object.keys(this.props.data[0]).splice(1);
     let selectedFeatures = [this.state.feature1, this.state.feature2];
-    return selectedFeatures.map((feature) => {
-      let featureData = this.props.data
-        .map(elem => {
-          return {
-            'x': elem['year'],
-            'y': Number.parseFloat(elem[feature]).toFixed(2)
-          }
-        });
-      return {id: feature, data: featureData};
-    })
+    return selectedFeatures.map((feature, i) => {
+      let featureDataX = this.props.data.map(elem => {
+        return Number.parseInt(elem['year'])
+      });
+      let featureDataY = this.props.data.map(elem => {
+        return Number.parseFloat(elem[feature])
+      });
+      let axis = 'y' + String(i+1);
+      return {
+        x: featureDataX,
+        y: featureDataY,
+        name: feature,
+        yaxis: axis,
+        type: 'scatter'
+      };
+    });
   };
 
   render() {
     const renderedData = this.formatRenderedData();
 
-    let corrData = renderedData.map((feature) =>{
-      let featureData = feature['data'];
-      return featureData.map((elem) => elem['y'] )
+    let corrData = renderedData.map((featureData) =>{
+      return featureData['y'];
     });
     let x = corrData[0].map(Number);
     let y = corrData[1].map(Number);
-    let correlation = spearson.correlation.pearson(x, y, true);
+    let correlation = spearson.correlation.pearson(x, y, true).toFixed(2);
 
     return (
       <Fragment>
@@ -69,48 +72,15 @@ class LIWCLineChart extends Component {
         <p>Feature 2</p>
         <h5>{correlation}</h5>
         <div style={{ height: this.props.height}}>
-          <ResponsiveLine
+          <Plot
             data={renderedData}
-            margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
-            xScale={{ type: 'linear', min: 'auto', max: 'auto' }}
-            yScale={{ type: 'linear', stacked: false, min: 'auto', max: 'auto' }}
-            axisTop={null}
-            axisBottom={{
-              orient: 'bottom',
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: 0,
-              legend: 'Date',
-              legendOffset: 36,
-              legendPosition: 'middle'
+            layout={{
+              yaxis: {title: 'LIWC: ' + this.state.feature1},
+              yaxis2: {
+                title: 'LIWC: ' + this.state.feature2,
+                overlaying: 'y',
+                side: 'right'}
             }}
-            axisLeft={{
-              orient: 'left',
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: 0,
-              legend: 'Emotion',
-              legendOffset: -40,
-              legendPosition: 'middle'
-            }}
-            axisRight={{
-              orient: 'right',
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: 0,
-              legend: 'asdf',
-              legendOffset: 40,
-              legendPosition: 'middle'
-            }}
-            enableSlices={'x'}
-            colors={{ scheme: 'nivo' }}
-            // pointSize={10}
-            pointColor={{ theme: 'background' }}
-            pointBorderWidth={2}
-            pointBorderColor={{ from: 'serieColor' }}
-            // pointLabel=y
-            pointLabelYOffset={-12}
-            useMesh={true}
           />
         </div>
       </Fragment>
