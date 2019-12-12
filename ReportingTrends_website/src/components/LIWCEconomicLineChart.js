@@ -3,6 +3,7 @@ import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 import spearson from '../static/spearson.js';
 import Plot from 'react-plotly.js'
+import '../static/main.css';
 
 class LIWCEconomicLineChart extends Component {
   // Declare a new state variable, which we'll call "count"
@@ -63,6 +64,7 @@ class LIWCEconomicLineChart extends Component {
     const { LIWCData } = this.props;
     const { economicData } = this.props;
     economicData.sort((a, b) => a.year - b.year);
+    console.log(economicData)
     let formattedLIWCData = this.formatLIWCData(LIWCData);
     let formattedEconomicData = this.formatEconomicData(economicData);
 
@@ -85,20 +87,33 @@ class LIWCEconomicLineChart extends Component {
 
     return (
       <Fragment>
-        <Dropdown options={this.state.LIWCFeatures}
-                  onChange={this.handleChangeLIWC}
-                  value={this.state.LIWCFeature}
-                  placeholder="Select an option"
-        />
-        <p>LIWC Feature</p>
-        <Dropdown options={this.state.economicFeatures}
-                  onChange={this.handleChangeEcon}
-                  value={this.state.economicFeature}
-                  placeholder="Select an option"
-        />
-        <p>Economic Feature</p>
-        <h5>{correlation}</h5>
-        <div style={{ height: this.props.height}}>
+        <div className='chartOptions'>
+          <div className='dropdownContainer'>
+            <span>LIWC Feature</span>
+            <Dropdown
+              className='dropdown'
+              options={this.state.LIWCFeatures}
+              onChange={this.handleChangeLIWC}
+              value={this.state.LIWCFeature}
+              placeholder="Select an option"
+            />
+          </div>
+          <div className='featureCorrelation'>
+            <span>Correlation:</span>
+            <h5>{correlation}</h5>
+          </div>
+          <div className='dropdownContainer'>
+            <span>Economic Feature</span>
+            <Dropdown
+              className='dropdown'
+              options={this.state.economicFeatures}
+              onChange={this.handleChangeEcon}
+              value={this.state.economicFeature}
+              placeholder="Select an option"
+            />
+          </div>
+        </div>
+        <div className='chart' style={{ height: this.props.height}}>
           <Plot
             data={renderedData}
             layout={{
