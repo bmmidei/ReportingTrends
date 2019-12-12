@@ -6,6 +6,7 @@ import Layout from "../components/layout"
 import EconomicDataTSNE from "../components/EconomicDataTSNE"
 import WordCountsLineChart from "../components/WordCountsLineChart";
 import TopicLineChart from "../components/TopicLineChart";
+import WorldEventsLineChart from "../components/WorldEventsLineChart";
 import Loadable from 'react-loadable';
 
 const LoadableLIWCLineChart = Loadable({
@@ -29,7 +30,7 @@ class IndexPage extends Component {
     LIWCData: [],
     TopicData: [],
     worldEvents: [
-      {year: 1929, event: 'Wall Street Crash Triggering Great Depression'},
+      {year: 1929, event: 'Wall Street Crash'},
       {year: 1939, event: 'Outbreak of WWII'},
       {year: 1945, event: 'Conclusion of WWII'},
       {year: 1955, event: 'Outbreak of Vietnam War'},
@@ -70,17 +71,14 @@ class IndexPage extends Component {
     const { TopicData } = this.state;
     return (
       <Layout>
-        {/*<SEO title="Reporting Trends" />*/}
         <h1>Analyzing Reporting Trends in the New York Times</h1>
-        {/*<div style={{maxWidth: `300px`, marginBottom: `1.45rem`}}>*/}
-        {/*  <Image/>*/}
-        {/*</div>*/}
         {EconomicData && <EconomicDataTSNE data={EconomicData} width={600} height={400}/>}
-        {EconomicData && <WordCountsLineChart data={EconomicData} width={600} height={400}/>}
         {LIWCData && <LoadableLIWCLineChart height={500} data={LIWCData}/>}
         {LIWCData && EconomicData &&
           <LoadableLIWCEconomicLineChart height={500} economicData={EconomicData} LIWCData={LIWCData}/>}
         {TopicData && <TopicLineChart height={500} data={TopicData}/>}
+        {LIWCData && <WorldEventsLineChart height={500} data={LIWCData} worldEvents={this.state.worldEvents}/>}
+
         <Link to="/page-2/">Go to page 2</Link>
       </Layout>
     )
