@@ -62,7 +62,7 @@ class LIWCEconomicLineChart extends Component {
     // let LIWCFeatures = Object.keys(this.props.data[0]).splice(1);
     const { LIWCData } = this.props;
     const { economicData } = this.props;
-
+    economicData.sort((a, b) => a.year - b.year);
     let formattedLIWCData = this.formatLIWCData(LIWCData);
     let formattedEconomicData = this.formatEconomicData(economicData);
 
