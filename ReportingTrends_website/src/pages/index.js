@@ -72,12 +72,12 @@ class IndexPage extends Component {
     return (
       <Layout>
         <h1>Analyzing Reporting Trends in the New York Times</h1>
-        {EconomicData && <EconomicDataTSNE data={EconomicData} width={600} height={400}/>}
-        {LIWCData && <LoadableLIWCLineChart height={500} data={LIWCData}/>}
+        {EconomicData && <EconomicDataTSNE data={EconomicData} height={400} width={600}/>}
+        {LIWCData && <LoadableLIWCLineChart height={500} width={600} data={LIWCData}/>}
         {LIWCData && EconomicData &&
-          <LoadableLIWCEconomicLineChart height={500} economicData={EconomicData} LIWCData={LIWCData}/>}
-        {TopicData && <TopicLineChart height={500} data={TopicData}/>}
-        {LIWCData && <WorldEventsLineChart height={500} data={LIWCData} worldEvents={this.state.worldEvents}/>}
+          <LoadableLIWCEconomicLineChart height={500} width={600} economicData={EconomicData} LIWCData={LIWCData}/>}
+        {TopicData && <TopicLineChart height={500} width={600} data={TopicData}/>}
+        {LIWCData && <WorldEventsLineChart height={500} width={600} data={LIWCData} worldEvents={this.state.worldEvents}/>}
 
         <Link to="/page-2/">Go to page 2</Link>
       </Layout>

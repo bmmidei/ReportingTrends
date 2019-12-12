@@ -3,6 +3,7 @@ import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 import spearson from '../static/spearson.js';
 import Plot from 'react-plotly.js';
+import '../static/main.css';
 
 
 class LIWCLineChart extends Component {
@@ -58,20 +59,33 @@ class LIWCLineChart extends Component {
 
     return (
       <Fragment>
-        <Dropdown options={this.state.LIWCFeatures}
-                  onChange={this.handleChange1}
-                  value={this.state.feature1}
-                  placeholder="Select an option"
-        />
-        <p>Feature 1</p>
-        <Dropdown options={this.state.LIWCFeatures}
-                  onChange={this.handleChange2}
-                  value={this.state.feature2}
-                  placeholder="Select an option"
-        />
-        <p>Feature 2</p>
-        <h5>{correlation}</h5>
-        <div style={{ height: this.props.height}}>
+        <div className='chartOptions'>
+          <div className='dropdownContainer'>
+            <span>LIWC Feature 1</span>
+            <Dropdown
+              className='dropdown'
+              options={this.state.LIWCFeatures}
+              onChange={this.handleChange1}
+              value={this.state.feature1}
+              placeholder="Select an option"
+            />
+          </div>
+          <div className='featureCorrelation'>
+            <span>Correlation:</span>
+            <h5>{correlation}</h5>
+          </div>
+          <div className='dropdownContainer'>
+            <span>LIWC Feature 2</span>
+            <Dropdown
+              className='dropdown'
+              options={this.state.LIWCFeatures}
+              onChange={this.handleChange2}
+              value={this.state.feature2}
+              placeholder="Select an option"
+            />
+          </div>
+        </div>
+        <div className='chart' style={{ height: this.props.height}}>
           <Plot
             data={renderedData}
             layout={{

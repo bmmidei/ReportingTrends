@@ -28,7 +28,7 @@ class TopicLineChart extends Component {
   render() {
     const renderedData = this.formatRenderedData();
     return (
-      <div style={{ height: this.props.height }}>
+      <div className='chart' style={{ height: this.props.height }}>
         <ResponsiveLine
           data={ renderedData }
           margin={{ top: 50, right: 110, bottom: 50, left: 60 }}

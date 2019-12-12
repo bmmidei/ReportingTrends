@@ -51,20 +51,29 @@ class WorldEventsLineChart extends Component {
         })
       });
     }
+
     return (
         <Fragment>
-          <Dropdown options={this.state.LIWCFeatures}
-                    onChange={this.handleChange}
-                    value={this.state.renderedFeature}
-                    placeholder="Select an option"
-          />
-          <p>LIWC Feature</p>
-          <button
-            className="btn btn-default"
-            // style={buttonStyle}
-            onClick={this.handleButtonPress}>Toggle World Events
-          </button>
-          <div style={{ height: this.props.height }}>
+          <div className='chartOptions'>
+            <div className='dropdownContainer'>
+              <span>LIWC Feature</span>
+              <Dropdown
+                className='dropdown'
+                options={this.state.LIWCFeatures}
+                onChange={this.handleChange}
+                value={this.state.renderedFeature}
+                placeholder="Select an option"
+              />
+            </div>
+            <div className='worldEventsBtnContainer'>
+              <button
+                className="btn btn-default"
+                // style={buttonStyle}
+                onClick={this.handleButtonPress}>Toggle World Events
+              </button>
+            </div>
+          </div>
+          <div className='chart' style={{ height: this.props.height }}>
             <ResponsiveLine
               data={ renderedData }
               margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
