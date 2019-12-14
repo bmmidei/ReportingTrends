@@ -2,9 +2,7 @@ import React, {Component} from "react"
 import { Link } from "gatsby"
 
 import Layout from "../components/layout"
-// import Image from "../components/image"
 import EconomicDataTSNE from "../components/EconomicDataTSNE"
-import WordCountsLineChart from "../components/WordCountsLineChart";
 import TopicLineChart from "../components/TopicLineChart";
 import WorldEventsLineChart from "../components/WorldEventsLineChart";
 import Loadable from 'react-loadable';

@@ -1,15 +1,12 @@
 import React, {Component, Fragment} from 'react';
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
-import spearson from '../static/spearson.js';
 import Plot from 'react-plotly.js';
 import '../static/main.css';
+import {sampleCorrelation} from "simple-statistics";
 
 
 class LIWCLineChart extends Component {
-  // Declare a new state variable, which we'll call "count"
-  // const [count, setCount] = useState(0);
-  // set the dimensions and margins of the graph
   state = {
     feature1: 'Positive_emotion',
     feature2: 'Negative_emotion',
@@ -47,15 +44,22 @@ class LIWCLineChart extends Component {
     });
   };
 
-  render() {
-    const renderedData = this.formatRenderedData();
-
+  calcCorrelation = (renderedData) => {
     let corrData = renderedData.map((featureData) =>{
       return featureData['y'];
     });
     let x = corrData[0].map(Number);
     let y = corrData[1].map(Number);
-    let correlation = spearson.correlation.pearson(x, y, true).toFixed(2);
+    if (x.length > 1 && y.length > 1){
+      return sampleCorrelation(x, y).toFixed(2);
+    } else {
+      return null
+    }
+  };
+
+  render() {
+    const renderedData = this.formatRenderedData();
+    let correlation = this.calcCorrelation(renderedData);
 
     return (
       <Fragment>
@@ -93,7 +97,8 @@ class LIWCLineChart extends Component {
               yaxis2: {
                 title: 'LIWC: ' + this.state.feature2,
                 overlaying: 'y',
-                side: 'right'}
+                side: 'right'},
+              legend: {itemclick: false}
             }}
           />
         </div>

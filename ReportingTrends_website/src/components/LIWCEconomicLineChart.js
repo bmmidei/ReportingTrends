@@ -1,14 +1,13 @@
 import React, {Component, Fragment} from 'react';
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
-import spearson from '../static/spearson.js';
 import Plot from 'react-plotly.js'
 import '../static/main.css';
+import {sampleCorrelation} from 'simple-statistics'
+
 
 class LIWCEconomicLineChart extends Component {
-  // Declare a new state variable, which we'll call "count"
-  // const [count, setCount] = useState(0);
-  // set the dimensions and margins of the graph
+
   state = {
     LIWCFeature: 'Positive_emotion',
     economicFeature: 'Inflation',
@@ -64,16 +63,13 @@ class LIWCEconomicLineChart extends Component {
     const { LIWCData } = this.props;
     const { economicData } = this.props;
     economicData.sort((a, b) => a.year - b.year);
-    console.log(economicData)
     let formattedLIWCData = this.formatLIWCData(LIWCData);
     let formattedEconomicData = this.formatEconomicData(economicData);
 
     return [formattedLIWCData, formattedEconomicData]
   };
 
-  render() {
-    const renderedData = this.formatRenderedData();
-
+  calcCorrelation = (renderedData) => {
     let commonYears = renderedData[0]['x'].filter(e => renderedData[1]['x'].indexOf(e) > -1).sort();
     let x = this.props.LIWCData
       .filter(elem =>  commonYears.indexOf(elem['year']) > -1)
@@ -83,7 +79,17 @@ class LIWCEconomicLineChart extends Component {
       .filter(elem =>  commonYears.indexOf(elem['year']) > -1)
       .map(elem => elem[this.state.economicFeature])
       .map(Number);
-    let correlation = spearson.correlation.pearson(x, y, true).toFixed(2);
+
+    if (x.length > 1 && y.length > 1){
+      return sampleCorrelation(x, y).toFixed(2);
+    } else {
+      return null
+    }
+  };
+
+  render() {
+    const renderedData = this.formatRenderedData();
+    let correlation = this.calcCorrelation(renderedData);
 
     return (
       <Fragment>
@@ -121,7 +127,8 @@ class LIWCEconomicLineChart extends Component {
               yaxis2: {
                 title: 'Economy: ' + this.state.economicFeature,
                 overlaying: 'y',
-                side: 'right'}
+                side: 'right'},
+              legend: {itemclick: false}
             }}
           />
         </div>
