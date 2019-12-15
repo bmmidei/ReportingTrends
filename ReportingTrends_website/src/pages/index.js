@@ -41,8 +41,8 @@ class IndexPage extends Component {
 
   queryData = (source) => {
     // Toggle these two lines between local dev and deployment
-    return fetch('https://eloquent-blackwell-3fb9dd.netlify.com/.netlify/functions/' + source, {
-      // return fetch('/.netlify/functions/' + source, {
+    // return fetch('https://reportingtrends.netlify.com/.netlify/functions/' + source, {
+      return fetch('/.netlify/functions/' + source, {
       headers: { accept: "Accept: application/json" },
       method: 'POST',
     }).then(response => {
