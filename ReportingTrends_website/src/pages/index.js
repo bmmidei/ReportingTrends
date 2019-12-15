@@ -1,11 +1,11 @@
 import React, {Component} from "react"
-import { Link } from "gatsby"
-
 import Layout from "../components/layout"
 import EconomicDataTSNE from "../components/EconomicDataTSNE"
 import TopicLineChart from "../components/TopicLineChart";
 import WorldEventsLineChart from "../components/WorldEventsLineChart";
 import Loadable from 'react-loadable';
+import '../static/main.css';
+
 
 const LoadableLIWCLineChart = Loadable({
   loader: () => import('../components/LIWCLineChart'),
@@ -52,7 +52,6 @@ class IndexPage extends Component {
 
   componentDidMount() {
     let dataSources = ['EconomicData', 'LIWCData', 'TopicData'];
-    console.log('fetching data');
     dataSources.forEach(source => {
       this.queryData(source).then((response) => {
         // Store queried data in state
@@ -70,14 +69,34 @@ class IndexPage extends Component {
     return (
       <Layout>
         <h1>Analyzing Reporting Trends in the New York Times</h1>
+        <h4>Brian Midei, Marko Mandic</h4>
+        <h6>Columbia University - ELEN6885 Fall 2019</h6>
+        <hr />
+        <h3>Motivation</h3>
+        <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+        <hr />
+        <h3>Clustering of Annual Economic Data</h3>
+        <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
         {EconomicData && <EconomicDataTSNE data={EconomicData} height={400} width={600}/>}
+        <hr />
+        <h3>Comparing LIWC Features</h3>
+        <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
         {LIWCData && <LoadableLIWCLineChart height={500} width={600} data={LIWCData}/>}
+        <hr />
+        <h3>Comparing LIWC and Economic Features</h3>
+        <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
         {LIWCData && EconomicData &&
           <LoadableLIWCEconomicLineChart height={500} width={600} economicData={EconomicData} LIWCData={LIWCData}/>}
+        <hr />
+        <h3>Trends in Economic and Political Reporting</h3>
+        <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
         {TopicData && <TopicLineChart height={500} width={600} data={TopicData}/>}
+        <hr />
+        <h3>Effects of Geopolitical Events on Reporting</h3>
+        <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
         {LIWCData && <WorldEventsLineChart height={500} width={600} data={LIWCData} worldEvents={this.state.worldEvents}/>}
 
-        <Link to="/page-2/">Go to page 2</Link>
+        {/*<Link to="/page-2/">Go to page 2</Link>*/}
       </Layout>
     )
   }
