@@ -68,7 +68,7 @@ class IndexPage extends Component {
     const { TopicData } = this.state;
     return (
       <Layout>
-        <h1>Analyzing Reporting Trends in the New York Times</h1>
+        <h1>Reporting Trends in the New York Times</h1>
         <h4>Brian Midei, Marko Mandic</h4>
         <h6>Columbia University - ELEN6885 Fall 2019</h6>
         <hr />
