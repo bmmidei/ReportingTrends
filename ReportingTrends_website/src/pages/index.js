@@ -41,8 +41,8 @@ class IndexPage extends Component {
 
   queryData = (source) => {
     // Toggle these two lines between local dev and deployment
-    // return fetch('https://reportingtrends.netlify.com/.netlify/functions/' + source, {
-      return fetch('/.netlify/functions/' + source, {
+    return fetch('https://reportingtrends.netlify.com/.netlify/functions/' + source, {
+      // return fetch('/.netlify/functions/' + source, {
       headers: { accept: "Accept: application/json" },
       method: 'POST',
     }).then(response => {
@@ -73,27 +73,50 @@ class IndexPage extends Component {
         <h6>Columbia University - ELEN6885 Fall 2019</h6>
         <hr />
         <h3>Motivation</h3>
-        <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+        <p>Journalism, and the associated bias and trends, has come under increased scrutiny in recent years.
+          However, much of this scrutiny is subjective in nature. Our goal is to quantitatively analyze reporting trends
+          over the 20th and 21st centuries and answer key questions with regard to trends in reporting over time.
+          How do linguistic features change over time and do they correlate with one another? Do linguistic features
+          correlate with economic conditions? How responsive is reporting to major geopolitical events? In addition,
+          our website can be used by researchers or other interested parties to perform their own analyses using our
+          interactive webpage.<br /><br />
+          To accomplish this, we analyzed metadata from over 12 million New York Times to
+          extract trends in keyword occurrences, sentiment analysis, and other linguistic features. We also compared
+          these results to major US economic indicators to determine whether news reporting was significantly affected
+          by macroeconomics or geopolitical events.</p>
         <hr />
         <h3>Clustering of Annual Economic Data</h3>
-        <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+        <p>We compiled economic features (Inflation, GDP percent change, Employment, and Unemployment) from our
+          economic data set on a yearly basis ranging from 1940 to 2010. We performed K-means clustering to determine
+          which years are similar in terms of the economic indicators. Using t-SNE dimensionality reduction on the data,
+          we can visualize the years and cluster labels. <br /> <br />
+          By inspecting the economic performance of the years that make up each cluster, we can identify that different
+          clusters represent varying levels of economic performance.</p>
         {EconomicData && <EconomicDataTSNE data={EconomicData} height={400} width={600}/>}
         <hr />
         <h3>Comparing LIWC Features</h3>
-        <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+        <p>Linguistic Inquiry and Word Count (LIWC) is a popular linguistic tool that extracts a standardized set of
+          linguistic features from text. We ran LIWC2015 on all the available article titles and compile the results
+          on a yearly basis. The plot below shows the relationship between selected LIWC features and their correlation
+          coefficient over the period for which data is available.</p>
         {LIWCData && <LoadableLIWCLineChart height={500} width={600} data={LIWCData}/>}
         <hr />
         <h3>Comparing LIWC and Economic Features</h3>
-        <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+        <p>The graph below shows the relationship between the selected economic and LIWC features.</p>
         {LIWCData && EconomicData &&
           <LoadableLIWCEconomicLineChart height={500} width={600} economicData={EconomicData} LIWCData={LIWCData}/>}
         <hr />
         <h3>Trends in Economic and Political Reporting</h3>
-        <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+        <p>We analyzed the set of keywords provided by the NYT and selected those which relate to economic and
+          political topics. We calculated the percentage of articles with those keywords on a yearly basis.
+          The plot below illustrates the percentage of political and economic topics was positively correlated
+          until the late 80’s and as well as a huge spike in the percentage of political articles after 2012.</p>
         {TopicData && <TopicLineChart height={500} width={600} data={TopicData}/>}
         <hr />
         <h3>Effects of Geopolitical Events on Reporting</h3>
-        <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+        <p>The graph below displays the value of the selected LIWC feature over time overlayed with significant
+          world events. In certain features, such as anger, we observe immediate changes following world events
+          implying a potential causality. </p>
         {LIWCData && <WorldEventsLineChart height={500} width={600} data={LIWCData} worldEvents={this.state.worldEvents}/>}
 
         {/*<Link to="/page-2/">Go to page 2</Link>*/}
